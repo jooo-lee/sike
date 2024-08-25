@@ -1,11 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import Navbar from './Navbar.jsx';
 
 describe('Navbar', () => {
   it('renders a nav element with correct heading and links', () => {
-    render(<Navbar />);
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
     const nav = screen.getByRole('navigation');
     const pageTitle = screen.getByRole('heading', { name: /sike/i });
     const homeLink = screen.getByRole('link', { name: /home/i });
