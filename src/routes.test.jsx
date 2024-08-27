@@ -57,4 +57,13 @@ describe('Routes', () => {
 
     expect(screen.getByRole('heading', { name: /cart/i })).toBeInTheDocument();
   });
+
+  it('navigates to error page if error is present', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/invalidRoute'],
+    });
+    render(<RouterProvider router={router} />);
+
+    expect(screen.getByRole('heading', { name: /error/i })).toBeInTheDocument();
+  });
 });
