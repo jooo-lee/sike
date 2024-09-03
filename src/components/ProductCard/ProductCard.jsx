@@ -19,6 +19,12 @@ const ProductCard = ({ product }) => {
         alt={product['node']['title']}
       />
       <p>{product['node']['title']}</p>
+      <p>
+        $
+        {Number.parseFloat(
+          product['node']['variants']['edges'][0]['node']['price']['amount']
+        ).toFixed(2)}
+      </p>
     </Card>
   );
 };

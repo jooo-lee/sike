@@ -53,6 +53,22 @@ describe('Product card', () => {
       </BrowserRouter>
     );
     const productTitle = screen.getByText(dummyProduct['node']['title']);
+
     expect(productTitle).toBeInTheDocument();
+  });
+
+  it('renders product price with two decimal places', () => {
+    render(
+      <BrowserRouter>
+        <ProductCard product={dummyProduct} />
+      </BrowserRouter>
+    );
+    const productPrice = screen.getByText(
+      `$${Number.parseFloat(
+        dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
+      ).toFixed(2)}`
+    );
+
+    expect(productPrice).toBeInTheDocument();
   });
 });
