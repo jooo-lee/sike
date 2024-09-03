@@ -18,6 +18,7 @@ const ProductCard = ({ product }) => {
         src={product['node']['featuredImage']['url']}
         alt={product['node']['title']}
       />
+      <p>{product['node']['title']}</p>
     </Card>
   );
 };

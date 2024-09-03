@@ -45,4 +45,14 @@ describe('Product card', () => {
     );
     expect(productImage).toHaveAttribute('alt', dummyProduct['node']['title']);
   });
+
+  it('renders product name', () => {
+    render(
+      <BrowserRouter>
+        <ProductCard product={dummyProduct} />
+      </BrowserRouter>
+    );
+    const productTitle = screen.getByText(dummyProduct['node']['title']);
+    expect(productTitle).toBeInTheDocument();
+  });
 });
