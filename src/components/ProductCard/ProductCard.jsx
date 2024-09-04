@@ -4,11 +4,16 @@ import styled from 'styled-components';
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: fit-content;
 `;
 
 const Img = styled.img`
-  width: 200px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+`;
+
+const Title = styled.p`
+  margin-bottom: 0.25rem;
 `;
 
 const ProductCard = ({ product }) => {
@@ -17,10 +22,12 @@ const ProductCard = ({ product }) => {
       <Img
         src={product['node']['featuredImage']['url']}
         alt={product['node']['title']}
+        width="200px"
+        height="200px"
       />
-      <p>{product['node']['title']}</p>
+      <Title>{product['node']['title']}</Title>
       <p>
-        $
+        CAD $
         {Number.parseFloat(
           product['node']['variants']['edges'][0]['node']['price']['amount']
         ).toFixed(2)}
