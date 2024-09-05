@@ -1,9 +1,12 @@
-import { it, expect, describe } from 'vitest';
+import { it, expect, describe, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import routes from './routes';
+
+// Mock fetch to prevent real API requests
+window.fetch = vi.fn(() => Promise.resolve());
 
 describe('Routes', () => {
   it('navigates to home page when page title is clicked', async () => {
