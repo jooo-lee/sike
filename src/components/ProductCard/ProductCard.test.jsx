@@ -64,7 +64,7 @@ describe('Product card', () => {
       </BrowserRouter>
     );
     const productPrice = screen.getByText(
-      `$${Number.parseFloat(
+      `CAD $${Number.parseFloat(
         dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
       ).toFixed(2)}`
     );
