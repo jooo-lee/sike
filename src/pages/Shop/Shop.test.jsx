@@ -1,5 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 
 import Shop from './Shop.jsx';
 
@@ -95,6 +99,32 @@ window.fetch = vi.fn(() => {
 });
 
 describe('Shop page', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('renders loading text while API request is in progress', async () => {
+    render(<Shop />);
+
+    const loading = screen.getByText('Loading...');
+
+    expect(loading).toBeInTheDocument();
+
+    // Gets rid of 'not wrapped in act(...)' warning
+    await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+  });
+
+  it('renders error message', async () => {
+    window.fetch.mockImplementationOnce(() => {
+      return Promise.reject('API is down!');
+    });
+    render(<Shop />);
+
+    const error = await screen.findByText('A network error was encountered');
+
+    expect(error).toBeInTheDocument();
+  });
+
   it('renders product titles', async () => {
     render(<Shop />);
 
