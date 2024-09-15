@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
   return (
     <Card>
       <Img
-        src={product['node']['featuredImage']['url']}
+        src={`${product['node']['featuredImage']['url']}&width=200&height=200`}
         alt={product['node']['title']}
         width="200px"
         height="200px"
