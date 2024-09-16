@@ -1,31 +1,53 @@
+import styled from 'styled-components';
+
 import useProducts from '../../hooks/useProducts.jsx';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
+
+const PageTitle = styled.h2`
+  margin-bottom: 1rem;
+`;
+
+const productImageSize = 200;
+
+const CardContainer = styled.div`
+  max-width: min(100%, 1200px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(${productImageSize}px, 1fr));
+  justify-items: center;
+  gap: 1.5rem 0.5rem;
+`;
 
 const Shop = () => {
   const { products, error, loading } = useProducts();
 
   if (loading)
     return (
-      <div>
-        <h2>Shop</h2>
+      <>
+        <PageTitle>Shop</PageTitle>
         <p>Loading...</p>
-      </div>
+      </>
     );
   if (error)
     return (
-      <div>
-        <h2>Shop</h2>
+      <>
+        <PageTitle>Shop</PageTitle>
         <p>A network error was encountered</p>
-      </div>
+      </>
     );
 
   return (
-    <div>
-      <h2>Shop</h2>
-      {products.map((product) => (
-        <ProductCard key={product['node']['id']} product={product} />
-      ))}
-    </div>
+    <>
+      <PageTitle>Shop</PageTitle>
+      <CardContainer>
+        {products.map((product) => (
+          <ProductCard
+            key={product['node']['id']}
+            product={product}
+            imgSize={productImageSize}
+          />
+        ))}
+      </CardContainer>
+    </>
   );
 };
 

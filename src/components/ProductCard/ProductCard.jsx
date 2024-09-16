@@ -16,14 +16,15 @@ const Title = styled.p`
   margin-bottom: 0.25rem;
 `;
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, imgSize }) => {
   return (
     <Card>
       <Img
-        src={`${product['node']['featuredImage']['url']}&width=200&height=200`}
+        src={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
         alt={product['node']['title']}
-        width="200px"
-        height="200px"
+        width={`${imgSize}px`}
+        height={`${imgSize}px`}
+        draggable="false"
       />
       <Title>{product['node']['title']}</Title>
       <p>
@@ -38,6 +39,7 @@ const ProductCard = ({ product }) => {
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
+  imgSize: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
