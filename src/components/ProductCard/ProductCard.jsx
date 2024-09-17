@@ -12,7 +12,7 @@ const Img = styled.img`
   margin-bottom: 1rem;
 `;
 
-const Title = styled.p`
+const Title = styled.h2`
   margin-bottom: 0.25rem;
 `;
 

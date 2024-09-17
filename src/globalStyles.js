@@ -23,9 +23,8 @@ const GlobalStyle = createGlobalStyle`
     gap: 2rem;
   }
 
-  h1 {
-    font-size: 1.75rem;
-    font-weight: normal;
+  h2 {
+    font-size: 1rem;
   }
 
   a {

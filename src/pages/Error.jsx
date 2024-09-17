@@ -4,7 +4,7 @@ const Error = () => {
   return (
     <div>
       <Navbar />
-      <h2>Error!</h2>
+      <h1>Error!</h1>
     </div>
   );
 };

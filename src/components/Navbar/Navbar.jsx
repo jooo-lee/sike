@@ -5,30 +5,24 @@ const Nav = styled.nav`
   margin-top: 1rem;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-`;
-
-const SikeLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const NavLinks = styled.div`
-  display: flex;
   gap: 0.5rem;
+`;
+
+const SiteTitle = styled(Link)`
+  text-decoration: none;
+  margin-right: auto;
+  font-size: 1.25rem;
+  font-weight: normal;
 `;
 
 const Navbar = () => {
   return (
     <Nav>
-      <h1>
-        <SikeLink to="/">Sike</SikeLink>
-      </h1>
-      <NavLinks>
-        <Link to="/">Home</Link>
-        <Link to="shop">Shop</Link>
-        <Link to="cart">Cart</Link>
-      </NavLinks>
+      <SiteTitle to="/">Sike</SiteTitle>
+      <Link to="/">Home</Link>
+      <Link to="shop">Shop</Link>
+      <Link to="cart">Cart</Link>
     </Nav>
   );
 };
