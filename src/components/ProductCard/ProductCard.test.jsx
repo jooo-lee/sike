@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import ProductCard from './ProductCard.jsx';
 
+const imgSize = 200;
+
 const dummyProduct = {
   node: {
     id: 'productId',
@@ -13,7 +15,7 @@ const dummyProduct = {
       house or running errands, these slides will offer all-day comfort.`,
     featuredImage: {
       id: 'imageId',
-      url: 'imageUrl',
+      url: `imageUrl`,
     },
     variants: {
       edges: [
@@ -34,14 +36,14 @@ describe('Product card', () => {
   it('renders product image with correct src and alt', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} />
+        <ProductCard product={dummyProduct} imgSize={imgSize} />
       </BrowserRouter>
     );
     const productImage = screen.getByRole('img');
 
     expect(productImage).toHaveAttribute(
       'src',
-      dummyProduct['node']['featuredImage']['url']
+      `${dummyProduct['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`
     );
     expect(productImage).toHaveAttribute('alt', dummyProduct['node']['title']);
   });
@@ -49,7 +51,7 @@ describe('Product card', () => {
   it('renders product name', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} />
+        <ProductCard product={dummyProduct} imgSize={imgSize} />
       </BrowserRouter>
     );
     const productTitle = screen.getByText(dummyProduct['node']['title']);
@@ -60,7 +62,7 @@ describe('Product card', () => {
   it('renders product price with two decimal places', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} />
+        <ProductCard product={dummyProduct} imgSize={imgSize} />
       </BrowserRouter>
     );
     const productPrice = screen.getByText(
