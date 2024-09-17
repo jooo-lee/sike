@@ -3,58 +3,44 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import ProductCard from './ProductCard.jsx';
+import dummyData from '../../dummyData.js';
 
 const imgSize = 200;
-
-const dummyProduct = {
-  node: {
-    id: 'productId',
-    title: 'Slides',
-    description: `Simple, minimal and comfortable, these slides feature a classic design 
-      in the perfect shade of iron. Whether you're just lounging around the 
-      house or running errands, these slides will offer all-day comfort.`,
-    featuredImage: {
-      id: 'imageId',
-      url: `imageUrl`,
-    },
-    variants: {
-      edges: [
-        {
-          node: {
-            price: {
-              amount: '25.0',
-              currencyCode: 'CAD',
-            },
-          },
-        },
-      ],
-    },
-  },
-};
 
 describe('Product card', () => {
   it('renders product image with correct src and alt', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} imgSize={imgSize} />
+        <ProductCard
+          product={dummyData['data']['products']['edges'][0]}
+          imgSize={imgSize}
+        />
       </BrowserRouter>
     );
     const productImage = screen.getByRole('img');
 
     expect(productImage).toHaveAttribute(
       'src',
-      `${dummyProduct['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`
+      `${dummyData['data']['products']['edges'][0]['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`
     );
-    expect(productImage).toHaveAttribute('alt', dummyProduct['node']['title']);
+    expect(productImage).toHaveAttribute(
+      'alt',
+      dummyData['data']['products']['edges'][0]['node']['title']
+    );
   });
 
   it('renders product name', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} imgSize={imgSize} />
+        <ProductCard
+          product={dummyData['data']['products']['edges'][0]}
+          imgSize={imgSize}
+        />
       </BrowserRouter>
     );
-    const productTitle = screen.getByText(dummyProduct['node']['title']);
+    const productTitle = screen.getByText(
+      dummyData['data']['products']['edges'][0]['node']['title']
+    );
 
     expect(productTitle).toBeInTheDocument();
   });
@@ -62,12 +48,17 @@ describe('Product card', () => {
   it('renders product price with two decimal places', () => {
     render(
       <BrowserRouter>
-        <ProductCard product={dummyProduct} imgSize={imgSize} />
+        <ProductCard
+          product={dummyData['data']['products']['edges'][0]}
+          imgSize={imgSize}
+        />
       </BrowserRouter>
     );
     const productPrice = screen.getByText(
       `CAD $${Number.parseFloat(
-        dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
+        dummyData['data']['products']['edges'][0]['node']['variants'][
+          'edges'
+        ][0]['node']['price']['amount']
       ).toFixed(2)}`
     );
 

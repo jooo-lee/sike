@@ -3,10 +3,16 @@ import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
-import routes from './routes';
+import routes from './routes.jsx';
+import dummyData from './dummyData.js';
 
 // Mock fetch to prevent real API requests
-window.fetch = vi.fn(() => Promise.resolve());
+window.fetch = vi.fn(() => {
+  return Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve(dummyData),
+  });
+});
 
 describe('Routes', () => {
   it('navigates to home page when page title is clicked', async () => {
