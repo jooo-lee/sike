@@ -1,29 +1,3 @@
-// const dummyData = {
-//   node: {
-//     id: 'productId',
-//     title: 'Slides',
-//     description: `Simple, minimal and comfortable, these slides feature a classic design
-//       in the perfect shade of iron. Whether you're just lounging around the
-//       house or running errands, these slides will offer all-day comfort.`,
-//     featuredImage: {
-//       id: 'imageId',
-//       url: `imageUrl`,
-//     },
-//     variants: {
-//       edges: [
-//         {
-//           node: {
-//             price: {
-//               amount: '25.0',
-//               currencyCode: 'CAD',
-//             },
-//           },
-//         },
-//       ],
-//     },
-//   },
-// };
-
 const dummyData = {
   data: {
     products: {
