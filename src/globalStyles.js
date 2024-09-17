@@ -10,13 +10,26 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   #root {
     padding: 1rem 1rem 3rem;
+    width: min(100%, 1200px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: normal;
+  }
+
+  a {
+    color: black;
   }
 `;
 

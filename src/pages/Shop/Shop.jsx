@@ -10,7 +10,7 @@ const PageTitle = styled.h2`
 const productImageSize = 200;
 
 const CardContainer = styled.div`
-  max-width: min(100%, 1200px);
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(${productImageSize}px, 1fr));
   justify-items: center;
