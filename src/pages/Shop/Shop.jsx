@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import useProducts from '../../hooks/useProducts.jsx';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 
-const PageTitle = styled.h2`
+const PageTitle = styled.h1`
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 `;
 
 const productImageSize = 200;
