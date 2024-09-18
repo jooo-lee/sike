@@ -17,15 +17,11 @@ describe('Product card', () => {
         />
       </BrowserRouter>
     );
-    const productImage = screen.getByRole('img');
+    const productImage = screen.getByRole('presentation');
 
     expect(productImage).toHaveAttribute(
       'src',
       `${dummyData['data']['products']['edges'][0]['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`
-    );
-    expect(productImage).toHaveAttribute(
-      'alt',
-      dummyData['data']['products']['edges'][0]['node']['title']
     );
   });
 

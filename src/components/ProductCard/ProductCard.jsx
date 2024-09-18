@@ -21,7 +21,7 @@ const ProductCard = ({ product, imgSize }) => {
     <Card>
       <Img
         src={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
-        alt={product['node']['title']}
+        alt=""
         width={`${imgSize}px`}
         height={`${imgSize}px`}
         draggable="false"
