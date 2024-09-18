@@ -12,13 +12,13 @@ describe('Navbar', () => {
       </BrowserRouter>
     );
     const nav = screen.getByRole('navigation');
-    const pageTitle = screen.getByRole('heading', { name: /sike/i });
+    const siteTitle = screen.getByRole('link', { name: /sike/i });
     const homeLink = screen.getByRole('link', { name: /home/i });
     const shopLink = screen.getByRole('link', { name: /shop/i });
     const cartLink = screen.getByRole('link', { name: /cart/i });
 
     expect(nav).toBeInTheDocument();
-    expect(pageTitle).toBeInTheDocument();
+    expect(siteTitle).toBeInTheDocument();
     expect(homeLink).toBeInTheDocument();
     expect(shopLink).toBeInTheDocument();
     expect(cartLink).toBeInTheDocument();
