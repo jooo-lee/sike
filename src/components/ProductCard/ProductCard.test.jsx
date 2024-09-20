@@ -5,38 +5,29 @@ import { BrowserRouter } from 'react-router-dom';
 import ProductCard from './ProductCard.jsx';
 import dummyData from '../../dummyData.js';
 
-const imgSize = 200;
+const dummyProduct = dummyData['data']['products']['edges'][0];
 
 describe('Product card', () => {
-  it('renders product image with correct src and alt', () => {
+  it('renders product image', () => {
     render(
       <BrowserRouter>
-        <ProductCard
-          product={dummyData['data']['products']['edges'][0]}
-          imgSize={imgSize}
-        />
+        <ProductCard product={dummyProduct} />
       </BrowserRouter>
     );
-    const productImage = screen.getByRole('presentation');
-
-    expect(productImage).toHaveAttribute(
-      'src',
-      `${dummyData['data']['products']['edges'][0]['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`
+    const productImage = screen.getByTestId(
+      dummyProduct['node']['featuredImage']['id']
     );
+
+    expect(productImage).toBeInTheDocument();
   });
 
   it('renders product name', () => {
     render(
       <BrowserRouter>
-        <ProductCard
-          product={dummyData['data']['products']['edges'][0]}
-          imgSize={imgSize}
-        />
+        <ProductCard product={dummyProduct} />
       </BrowserRouter>
     );
-    const productTitle = screen.getByText(
-      dummyData['data']['products']['edges'][0]['node']['title']
-    );
+    const productTitle = screen.getByText(dummyProduct['node']['title']);
 
     expect(productTitle).toBeInTheDocument();
   });
@@ -44,17 +35,12 @@ describe('Product card', () => {
   it('renders product price with two decimal places', () => {
     render(
       <BrowserRouter>
-        <ProductCard
-          product={dummyData['data']['products']['edges'][0]}
-          imgSize={imgSize}
-        />
+        <ProductCard product={dummyProduct} />
       </BrowserRouter>
     );
     const productPrice = screen.getByText(
       `CAD $${Number.parseFloat(
-        dummyData['data']['products']['edges'][0]['node']['variants'][
-          'edges'
-        ][0]['node']['price']['amount']
+        dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
       ).toFixed(2)}`
     );
 

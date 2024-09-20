@@ -18,17 +18,20 @@ const Title = styled.h2`
   margin-bottom: 0.25rem;
 `;
 
-const ProductCard = ({ product, imgSize }) => {
+const ProductCard = ({ product, imgSize = 200 }) => {
   return (
     <Card
       to={`/product/${product['node']['title'].toLowerCase()}`}
       state={{ product: product }}>
+      {/* Product images have empty alt attributes since they are presented 
+      alongside the product names. */}
       <Img
         src={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
         alt=""
         width={`${imgSize}px`}
         height={`${imgSize}px`}
         draggable="false"
+        data-testid={`${product['node']['featuredImage']['id']}`}
       />
       <Title>{product['node']['title']}</Title>
       <p>
@@ -43,7 +46,7 @@ const ProductCard = ({ product, imgSize }) => {
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
-  imgSize: PropTypes.number.isRequired,
+  imgSize: PropTypes.number,
 };
 
 export default ProductCard;
