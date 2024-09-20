@@ -4,8 +4,9 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 
-import Shop from './Shop.jsx';
+import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
 
 // Mock fetch to prevent real API requests
@@ -22,13 +23,16 @@ describe('Shop page', () => {
   });
 
   it('renders loading text while API request is in progress', async () => {
-    render(<Shop />);
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
 
     const loading = screen.getByText('Loading...');
 
     expect(loading).toBeInTheDocument();
 
-    // Gets rid of 'not wrapped in act(...)' warning
+    // Prevents 'not wrapped in act(...)' warning
     await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
   });
 
@@ -36,7 +40,10 @@ describe('Shop page', () => {
     window.fetch.mockImplementationOnce(() => {
       return Promise.reject('API is down!');
     });
-    render(<Shop />);
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
 
     const error = await screen.findByText('A network error was encountered');
 
@@ -44,7 +51,10 @@ describe('Shop page', () => {
   });
 
   it('renders product titles', async () => {
-    render(<Shop />);
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
 
     for (const edge of dummyData['data']['products']['edges']) {
       const title = await screen.findByText(edge['node']['title']);
@@ -53,7 +63,10 @@ describe('Shop page', () => {
   });
 
   it('renders product images', async () => {
-    render(<Shop />);
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
 
     /* 
     Originally I selected the images using their alt text and checked that each
@@ -72,7 +85,10 @@ describe('Shop page', () => {
   });
 
   it('renders product prices', async () => {
-    render(<Shop />);
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
 
     for (const edge of dummyData['data']['products']['edges']) {
       const price = await screen.findByText(

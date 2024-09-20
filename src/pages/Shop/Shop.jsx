@@ -5,7 +5,6 @@ import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 
 const PageTitle = styled.h1`
   margin-bottom: 1rem;
-  font-size: 1.5rem;
 `;
 
 const productImageSize = 200;

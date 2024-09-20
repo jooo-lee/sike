@@ -66,4 +66,23 @@ describe('Routes', () => {
 
     expect(screen.getByRole('heading', { name: /cart/i })).toBeInTheDocument();
   });
+
+  it('navigates to correct product page when product is clicked', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
+    const productName = new RegExp(
+      dummyData['data']['products']['edges'][0]['node']['title'],
+      'i'
+    );
+    const productLink = await screen.findByRole('link', { name: productName });
+
+    await user.click(productLink);
+
+    expect(
+      screen.getByRole('heading', { name: productName, level: 1 })
+    ).toBeInTheDocument();
+  });
 });

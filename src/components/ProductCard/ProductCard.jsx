@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Card = styled.div`
+const Card = styled(Link)`
   display: flex;
   flex-direction: column;
   width: fit-content;
+  text-decoration: none;
 `;
 
 const Img = styled.img`
@@ -18,7 +20,9 @@ const Title = styled.h2`
 
 const ProductCard = ({ product, imgSize }) => {
   return (
-    <Card>
+    <Card
+      to={`/product/${product['node']['title'].toLowerCase()}`}
+      state={{ product: product }}>
       <Img
         src={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
         alt=""

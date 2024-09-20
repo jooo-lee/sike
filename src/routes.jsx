@@ -3,6 +3,7 @@ import Home from './pages/Home.jsx';
 import Shop from './pages/Shop/Shop.jsx';
 import Cart from './pages/Cart.jsx';
 import Error from './pages/Error.jsx';
+import Product from './pages/Product/Product.jsx';
 
 const routes = [
   {
@@ -13,6 +14,7 @@ const routes = [
       { index: true, element: <Home /> },
       { path: 'shop', element: <Shop /> },
       { path: 'cart', element: <Cart /> },
+      { path: 'product/:name', element: <Product /> },
     ],
   },
 ];
