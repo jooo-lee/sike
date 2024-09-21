@@ -28,12 +28,14 @@ describe('shop page', () => {
     });
     render(<RouterProvider router={router} />);
 
-    const loading = screen.getByText('Loading...');
+    const loading = screen.getByLabelText('tail-spin-loading');
 
     expect(loading).toBeInTheDocument();
 
     // Prevents 'not wrapped in act(...)' warning
-    await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+    await waitForElementToBeRemoved(() =>
+      screen.getByLabelText('tail-spin-loading')
+    );
   });
 
   it('renders error message', async () => {
