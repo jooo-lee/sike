@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import useProducts from '../../hooks/useProducts.jsx';
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 
-const PageTitle = styled.h1`
-  margin-bottom: 1rem;
-`;
-
 const productImageSize = 200;
 
 const CardContainer = styled.div`
@@ -24,7 +20,7 @@ const Shop = () => {
   if (loading)
     return (
       <>
-        <PageTitle>Shop</PageTitle>
+        <h1>Shop</h1>
         <TailSpin
           visible={true}
           height="80"
@@ -41,14 +37,14 @@ const Shop = () => {
   if (error)
     return (
       <>
-        <PageTitle>Shop</PageTitle>
+        <h1>Shop</h1>
         <p>A network error was encountered</p>
       </>
     );
 
   return (
     <>
-      <PageTitle>Shop</PageTitle>
+      <h1>Shop</h1>
       <CardContainer>
         {products.map((product) => (
           <ProductCard

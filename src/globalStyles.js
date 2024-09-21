@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   h2 {
