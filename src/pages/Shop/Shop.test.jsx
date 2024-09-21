@@ -17,7 +17,7 @@ window.fetch = vi.fn(() => {
   });
 });
 
-describe('Shop page', () => {
+describe('shop page', () => {
   beforeEach(() => {
     window.localStorage.clear();
   });

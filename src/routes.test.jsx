@@ -14,7 +14,7 @@ window.fetch = vi.fn(() => {
   });
 });
 
-describe('Routes', () => {
+describe('routes', () => {
   it('navigates to home page when page title is clicked', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {

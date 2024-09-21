@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Navbar from './Navbar.jsx';
 
-describe('Navbar', () => {
+describe('navbar', () => {
   it('renders a nav element with correct heading and links', () => {
     render(
       <BrowserRouter>

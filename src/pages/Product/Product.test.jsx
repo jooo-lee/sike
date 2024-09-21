@@ -16,7 +16,7 @@ window.fetch = vi.fn(() => {
 
 const dummyProduct = dummyData['data']['products']['edges'][0];
 
-describe('Product page', () => {
+describe('product page', () => {
   it('renders product name', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {

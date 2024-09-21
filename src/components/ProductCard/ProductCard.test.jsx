@@ -7,7 +7,7 @@ import dummyData from '../../dummyData.js';
 
 const dummyProduct = dummyData['data']['products']['edges'][0];
 
-describe('Product card', () => {
+describe('product card', () => {
   it('renders product image', () => {
     render(
       <BrowserRouter>
