@@ -1,3 +1,4 @@
+import { TailSpin } from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import useProducts from '../../hooks/useProducts.jsx';
@@ -24,9 +25,19 @@ const Shop = () => {
     return (
       <>
         <PageTitle>Shop</PageTitle>
-        <p>Loading...</p>
+        <TailSpin
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
       </>
     );
+
   if (error)
     return (
       <>
