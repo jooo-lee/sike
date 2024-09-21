@@ -14,23 +14,38 @@ window.fetch = vi.fn(() => {
   });
 });
 
+const dummyProduct = dummyData['data']['products']['edges'][0];
+
 describe('Product page', () => {
-  it('renders the product name', async () => {
+  it('renders product name', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: ['/shop'],
     });
     render(<RouterProvider router={router} />);
-    const productName = new RegExp(
-      dummyData['data']['products']['edges'][0]['node']['title'],
-      'i'
-    );
-    const product = await screen.findByRole('link', { name: productName });
+    const productName = new RegExp(dummyProduct['node']['title'], 'i');
+    const productLink = await screen.findByRole('link', { name: productName });
 
-    await user.click(product);
+    await user.click(productLink);
 
     expect(
       screen.getByRole('heading', { name: productName, level: 1 })
+    ).toBeInTheDocument();
+  });
+
+  it('renders product image', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
+    const productName = new RegExp(dummyProduct['node']['title'], 'i');
+    const productLink = await screen.findByRole('link', { name: productName });
+
+    await user.click(productLink);
+
+    expect(
+      screen.getByTestId(dummyProduct['node']['featuredImage']['id'])
     ).toBeInTheDocument();
   });
 });
