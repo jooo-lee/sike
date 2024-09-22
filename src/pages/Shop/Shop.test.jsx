@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   render,
   screen,
@@ -10,10 +10,6 @@ import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
 
 describe('shop page', () => {
-  beforeEach(() => {
-    window.localStorage.clear();
-  });
-
   it('renders loading text while API request is in progress', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/shop'],
@@ -31,6 +27,7 @@ describe('shop page', () => {
   });
 
   it('renders error message', async () => {
+    window.localStorage.clear();
     window.fetch.mockImplementationOnce(() => {
       return Promise.reject('API is down!');
     });
