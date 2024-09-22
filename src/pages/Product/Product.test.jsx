@@ -1,17 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 
 import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
-
-// Mock fetch to prevent real API requests
-window.fetch = vi.fn(() => {
-  return Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve(dummyData),
-  });
-});
 
 const dummyProduct = dummyData['data']['products']['edges'][0];
 

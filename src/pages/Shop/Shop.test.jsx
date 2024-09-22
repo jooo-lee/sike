@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   render,
   screen,
@@ -8,14 +8,6 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 
 import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
-
-// Mock fetch to prevent real API requests
-window.fetch = vi.fn(() => {
-  return Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve(dummyData),
-  });
-});
 
 describe('shop page', () => {
   beforeEach(() => {
