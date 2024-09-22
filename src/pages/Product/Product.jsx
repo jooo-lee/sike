@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import useProducts from '../../hooks/useProducts.jsx';
 
 const Product = () => {
-  const [loading, setLoading] = useState(true);
+  const { productId } = useParams();
+  const { products, error, loading } = useProducts();
 
-  // Get state value from ProductCard
-  const location = useLocation();
-  const { product } = location.state;
-
-  return (
-    <>
-      <h1>{product['node']['title']}</h1>
-      {loading ? (
+  if (loading) {
+    return (
+      <>
         <TailSpin
           visible={true}
           height="80"
@@ -23,16 +20,31 @@ const Product = () => {
           wrapperStyle={{}}
           wrapperClass=""
         />
-      ) : (
-        ''
-      )}
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <p>A network error was encountered</p>
+      </>
+    );
+  }
+
+  const product = products.find(
+    (product) => product['node']['id'].slice(22) === productId
+  );
+
+  return (
+    <>
+      <h1>{product['node']['title']}</h1>
       <img
         srcSet={`${product['node']['featuredImage']['url']}&width=200&height=200 200w, ${product['node']['featuredImage']['url']}&width=400&height=400 400w`}
         sizes="(max-width: 450px) 200px, 400px"
         src={`${product['node']['featuredImage']['url']}&width=400&height=400`}
         alt=""
         data-testid={`${product['node']['featuredImage']['id']}`}
-        onLoad={() => setLoading(false)}
       />
     </>
   );

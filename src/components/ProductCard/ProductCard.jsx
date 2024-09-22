@@ -20,9 +20,7 @@ const Title = styled.h2`
 
 const ProductCard = ({ product, imgSize = 200 }) => {
   return (
-    <Card
-      to={`/product/${product['node']['title'].toLowerCase()}`}
-      state={{ product: product }}>
+    <Card to={`/product/${product['node']['id'].slice(22)}`}>
       {/* Product images have empty alt attributes since they are presented 
       alongside the product names. */}
       <Img

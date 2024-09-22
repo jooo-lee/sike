@@ -1,7 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
@@ -17,35 +16,29 @@ window.fetch = vi.fn(() => {
 const dummyProduct = dummyData['data']['products']['edges'][0];
 
 describe('product page', () => {
-  it('renders product name', async () => {
-    const user = userEvent.setup();
+  it('renders product name as heading', async () => {
     const router = createMemoryRouter(routes, {
-      initialEntries: ['/shop'],
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
     const productName = new RegExp(dummyProduct['node']['title'], 'i');
-    const productLink = await screen.findByRole('link', { name: productName });
+    const heading = await screen.findByRole('heading', {
+      name: productName,
+      level: 1,
+    });
 
-    await user.click(productLink);
-
-    expect(
-      screen.getByRole('heading', { name: productName, level: 1 })
-    ).toBeInTheDocument();
+    expect(heading).toBeInTheDocument();
   });
 
   it('renders product image', async () => {
-    const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
-      initialEntries: ['/shop'],
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const productName = new RegExp(dummyProduct['node']['title'], 'i');
-    const productLink = await screen.findByRole('link', { name: productName });
+    const image = await screen.findByTestId(
+      dummyProduct['node']['featuredImage']['id']
+    );
 
-    await user.click(productLink);
-
-    expect(
-      screen.getByTestId(dummyProduct['node']['featuredImage']['id'])
-    ).toBeInTheDocument();
+    expect(image).toBeInTheDocument();
   });
 });

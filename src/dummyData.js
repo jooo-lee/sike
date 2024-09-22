@@ -4,13 +4,13 @@ const dummyData = {
       edges: [
         {
           node: {
-            id: 'product0',
+            id: 'gid://shopify/Product/0',
             title: 'Slides',
             description: `Simple, minimal and comfortable, these slides feature a classic design 
             in the perfect shade of iron. Whether you're just lounging around the 
             house or running errands, these slides will offer all-day comfort.`,
             featuredImage: {
-              id: 'image0',
+              id: 'gid://shopify/ProductImage/0',
               url: 'imageUrl0',
             },
             variants: {
@@ -29,13 +29,13 @@ const dummyData = {
         },
         {
           node: {
-            id: 'product1',
+            id: 'gid://shopify/Product/1',
             title: 'Sweatpants',
             description: `Soft and comfortable sweatpants in stylish shades. They are 
             perfect for lounging with their cozy stretch fabric that offers just the 
             right amount of warmth. Enjoy the ultimate relaxation experience!`,
             featuredImage: {
-              id: 'image1',
+              id: 'gid://shopify/ProductImage/1',
               url: 'imageUrl1',
             },
             variants: {
@@ -54,13 +54,13 @@ const dummyData = {
         },
         {
           node: {
-            id: 'product2',
+            id: 'gid://shopify/Product/2',
             title: "Men's T-shirt",
             description: `Crafted from organic cotton, this classic T-shirt features 
             a relaxed fit, crew neckline and timeless look. Enjoy the breathable 
             comfort of 100% organic cotton.`,
             featuredImage: {
-              id: 'image2',
+              id: 'gid://shopify/ProductImage/2',
               url: 'imageUrl2',
             },
             variants: {
