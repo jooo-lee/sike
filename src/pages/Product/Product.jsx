@@ -2,6 +2,7 @@ import { TailSpin } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 
 import useProducts from '../../hooks/useProducts.jsx';
+import QuantityInput from '../../components/QuantityInput/QuantityInput.jsx';
 
 const Product = () => {
   const { productId } = useParams();
@@ -46,6 +47,9 @@ const Product = () => {
         alt=""
         data-testid={`${product['node']['featuredImage']['id']}`}
       />
+      <form action="">
+        <QuantityInput />
+      </form>
     </>
   );
 };
