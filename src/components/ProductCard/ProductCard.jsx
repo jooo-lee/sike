@@ -9,7 +9,7 @@ const Card = styled(Link)`
   text-decoration: none;
 `;
 
-const Img = styled.img`
+const Picture = styled.picture`
   border-radius: 8px;
   margin-bottom: 1rem;
 `;
@@ -23,14 +23,25 @@ const ProductCard = ({ product, imgSize = 200 }) => {
     <Card to={`/product/${product['node']['id'].slice(22)}`}>
       {/* Product images have empty alt attributes since they are presented 
       alongside the product names. */}
-      <Img
-        src={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
-        alt=""
-        width={`${imgSize}px`}
-        height={`${imgSize}px`}
-        draggable="false"
-        data-testid={`${product['node']['featuredImage']['id']}`}
-      />
+      <Picture>
+        <source
+          media="(max-width: 450px)"
+          srcSet={`${product['node']['featuredImage']['url']}&width=${
+            imgSize + 100
+          }&height=${imgSize + 100}`}
+          width={imgSize}
+          height={imgSize}
+        />
+        <img
+          src={`${product['node']['featuredImage']['url']}&width=${
+            imgSize + 200
+          }&height=${imgSize + 200}`}
+          alt=""
+          data-testid={`${product['node']['featuredImage']['id']}`}
+          width={imgSize}
+          height={imgSize}
+        />
+      </Picture>
       <Title>{product['node']['title']}</Title>
       <p>
         CAD $

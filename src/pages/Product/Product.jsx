@@ -40,13 +40,27 @@ const Product = () => {
   return (
     <>
       <h1>{product['node']['title']}</h1>
-      <img
-        srcSet={`${product['node']['featuredImage']['url']}&width=200&height=200 200w, ${product['node']['featuredImage']['url']}&width=400&height=400 400w`}
-        sizes="(max-width: 450px) 200px, 400px"
-        src={`${product['node']['featuredImage']['url']}&width=400&height=400`}
-        alt=""
-        data-testid={`${product['node']['featuredImage']['id']}`}
-      />
+      <picture>
+        <source
+          media="(max-width: 350px)"
+          srcSet={`${product['node']['featuredImage']['url']}&width=200&height=200`}
+          width="200"
+          height="200"
+        />
+        <source
+          media="(max-width: 450px)"
+          srcSet={`${product['node']['featuredImage']['url']}&width=450&height=450`}
+          width="300"
+          height="300"
+        />
+        <img
+          src={`${product['node']['featuredImage']['url']}&width=600&height=600`}
+          alt=""
+          data-testid={`${product['node']['featuredImage']['id']}`}
+          width="400"
+          height="400"
+        />
+      </picture>
       <form action="">
         <QuantityInput />
       </form>
