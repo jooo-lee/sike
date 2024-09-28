@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 
 import routes from '../../routes.jsx';
@@ -8,6 +12,22 @@ import dummyData from '../../dummyData.js';
 const dummyProduct = dummyData['data']['products']['edges'][0];
 
 describe('product page', () => {
+  it('renders loading indicator', async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    const loading = screen.getByLabelText('tail-spin-loading');
+
+    expect(loading).toBeInTheDocument();
+
+    // Prevents 'not wrapped in act(...)' warning
+    await waitForElementToBeRemoved(() =>
+      screen.getByLabelText('tail-spin-loading')
+    );
+  });
+
   it('renders product name as heading', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
