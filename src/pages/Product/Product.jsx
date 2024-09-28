@@ -65,6 +65,7 @@ const Product = () => {
         <QuantityInput />
         <button>Add to cart</button>
       </form>
+      <p>{product['node']['description']}</p>
     </>
   );
 };

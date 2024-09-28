@@ -69,6 +69,19 @@ describe('product page', () => {
     expect(image).toBeInTheDocument();
   });
 
+  it('renders product description', async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const description = await screen.findByText(
+      dummyProduct['node']['description'],
+      { collapseWhitespace: false }
+    );
+
+    expect(description).toBeInTheDocument();
+  });
+
   it('renders product quantity dropdown', () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
