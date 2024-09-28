@@ -28,6 +28,21 @@ describe('product page', () => {
     );
   });
 
+  it('renders error message', async () => {
+    window.localStorage.clear();
+    window.fetch.mockImplementationOnce(() => {
+      return Promise.reject('API is down!');
+    });
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    const error = await screen.findByText('A network error was encountered');
+
+    expect(error).toBeInTheDocument();
+  });
+
   it('renders product name as heading', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
