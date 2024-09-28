@@ -45,4 +45,14 @@ describe('product page', () => {
 
     expect(dropdown).toBeInTheDocument();
   });
+
+  it('renders add to cart button', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const addToCart = screen.getByRole('button', { name: /add to cart/i });
+
+    expect(addToCart).toBeInTheDocument();
+  });
 });

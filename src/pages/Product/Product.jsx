@@ -63,6 +63,7 @@ const Product = () => {
       </picture>
       <form action="">
         <QuantityInput />
+        <button>Add to cart</button>
       </form>
     </>
   );
