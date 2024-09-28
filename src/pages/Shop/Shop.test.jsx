@@ -10,7 +10,7 @@ import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
 
 describe('shop page', () => {
-  it('renders loading text while API request is in progress', async () => {
+  it('renders loading indicator while API request is in progress', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/shop'],
     });
