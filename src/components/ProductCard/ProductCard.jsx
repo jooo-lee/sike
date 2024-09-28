@@ -9,12 +9,8 @@ const Card = styled(Link)`
   text-decoration: none;
 `;
 
-const Picture = styled.picture`
-  border-radius: 8px;
-  margin-bottom: 1rem;
-`;
-
 const Title = styled.h2`
+  margin-top: 1rem;
   margin-bottom: 0.25rem;
 `;
 
@@ -23,7 +19,7 @@ const ProductCard = ({ product, imgSize = 200 }) => {
     <Card to={`/product/${product['node']['id'].slice(22)}`}>
       {/* Product images have empty alt attributes since they are presented 
       alongside the product names. */}
-      <Picture>
+      <picture>
         <source
           media="(max-width: 450px)"
           srcSet={`${product['node']['featuredImage']['url']}&width=${
@@ -41,7 +37,7 @@ const ProductCard = ({ product, imgSize = 200 }) => {
           width={imgSize}
           height={imgSize}
         />
-      </Picture>
+      </picture>
       <Title>{product['node']['title']}</Title>
       <p>
         CAD $
