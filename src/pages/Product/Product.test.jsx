@@ -34,12 +34,12 @@ describe('product page', () => {
     expect(image).toBeInTheDocument();
   });
 
-  it('renders product quantity dropdown', async () => {
+  it('renders product quantity dropdown', () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const dropdown = await screen.findByRole('combobox', {
+    const dropdown = screen.getByRole('combobox', {
       name: /quantity/i,
     });
 
