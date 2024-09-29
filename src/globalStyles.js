@@ -8,7 +8,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: Helvetica, Arial, Roboto, sans-serif;;
   }
 
+  html {
+    height: 100%;
+  }
+
   body {
+    min-height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -38,6 +43,15 @@ const GlobalStyle = createGlobalStyle`
 
   img {
     border-radius: 8px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: #0071e3;
+    color: white;
+    border: none;
+    border-radius: 980px;
   }
 `;
 
