@@ -82,16 +82,16 @@ describe('product page', () => {
     expect(description).toBeInTheDocument();
   });
 
-  it('renders product quantity dropdown', () => {
+  it('renders product quantity input', () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const dropdown = screen.getByRole('combobox', {
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
-    expect(dropdown).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
   });
 
   it('renders add to cart button', () => {
