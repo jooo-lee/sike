@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import useProducts from '../../hooks/useProducts.jsx';
 import QuantityInput from '../../components/QuantityInput/QuantityInput.jsx';
+import MainButton from '../../components/MainButton/MainButton.jsx';
 
 const Wrapper = styled.div`
   display: grid;
@@ -119,7 +120,7 @@ const Product = () => {
         <Sidebar>
           <Form action="">
             <QuantityInput />
-            <button>Add to cart</button>
+            <MainButton text={'Add to cart'} />
           </Form>
           <Description>{product['node']['description']}</Description>
         </Sidebar>
