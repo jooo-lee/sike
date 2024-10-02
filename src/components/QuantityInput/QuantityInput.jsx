@@ -98,7 +98,8 @@ const QuantityInput = () => {
         <DecrementButton
           type="button"
           aria-label="Decrease quantity"
-          onClick={handleDecrement}>
+          onClick={handleDecrement}
+          disabled={value <= 1}>
           &minus;
         </DecrementButton>
         <Input
@@ -114,7 +115,8 @@ const QuantityInput = () => {
         <IncrementButton
           type="button"
           aria-label="Increase quantity"
-          onClick={handleIncrement}>
+          onClick={handleIncrement}
+          disabled={value >= 5}>
           +
         </IncrementButton>
       </Div>
