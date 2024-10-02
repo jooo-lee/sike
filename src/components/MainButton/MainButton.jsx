@@ -8,6 +8,7 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 980px;
+  outline-offset: 4px;
 `;
 
 const MainButton = ({ text, type = 'submit' }) => {

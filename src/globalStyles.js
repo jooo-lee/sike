@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     color: black;
+    outline-offset: 4px;
   }
 
   img {
