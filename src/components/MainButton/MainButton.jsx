@@ -9,6 +9,12 @@ const Button = styled.button`
   border: none;
   border-radius: 980px;
   outline-offset: 4px;
+  transition: background-color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #0145b7;
+  }
 `;
 
 const MainButton = ({ text, type = 'submit' }) => {
