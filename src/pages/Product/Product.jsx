@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     'image'
     'sidebar';
   justify-items: center;
-  gap: 1rem;
+  gap: 2rem;
 
   @media (min-width: 950px) {
     height: 100%;
@@ -33,6 +33,7 @@ const Picture = styled.picture`
 
 const H1 = styled.h1`
   grid-area: title;
+  margin-bottom: 0;
   @media (min-width: 950px) {
     align-self: end;
   }
@@ -43,7 +44,7 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
 `;
 
 const Form = styled.form`
