@@ -93,7 +93,7 @@ const QuantityInput = () => {
 
   return (
     <Wrapper>
-      <label htmlFor="quantity">Quantity:</label>
+      <label htmlFor="quantityInput">Quantity:</label>
       <Div>
         <DecrementButton
           type="button"
@@ -104,8 +104,8 @@ const QuantityInput = () => {
         </DecrementButton>
         <Input
           pattern="[0-9]*"
-          id="quantity"
-          name="quantity"
+          id="quantityInput"
+          name="quantityInput"
           type="number"
           value={value}
           onChange={(e) => setValue(e.target.value)}

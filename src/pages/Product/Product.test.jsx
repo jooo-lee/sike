@@ -5,6 +5,7 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 import routes from '../../routes.jsx';
 import dummyData from '../../dummyData.js';
@@ -82,7 +83,18 @@ describe('product page', () => {
     expect(description).toBeInTheDocument();
   });
 
-  it('renders product quantity input', () => {
+  it('renders product quantity form', async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const form = await screen.findByRole('form', { name: /quantityForm/i });
+
+    expect(form).toBeInTheDocument();
+  });
+
+  it('updates cart quantity when product is added to cart', async () => {
+    const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
@@ -90,17 +102,16 @@ describe('product page', () => {
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
-
-    expect(input).toBeInTheDocument();
-  });
-
-  it('renders add to cart button', () => {
-    const router = createMemoryRouter(routes, {
-      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    const addToCartBtn = await screen.findByRole('button', {
+      name: /add to cart/i,
     });
-    render(<RouterProvider router={router} />);
-    const addToCart = screen.getByRole('button', { name: /add to cart/i });
 
-    expect(addToCart).toBeInTheDocument();
+    await user.clear(input);
+    await user.type(input, '3');
+    await user.click(addToCartBtn);
+
+    expect(
+      screen.getByRole('link', { name: /cart \(3\)/i })
+    ).toBeInTheDocument();
   });
 });

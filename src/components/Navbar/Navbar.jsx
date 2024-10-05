@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Nav = styled.nav`
   margin-top: 1rem;
@@ -16,15 +17,19 @@ const SiteTitle = styled(Link)`
   font-weight: normal;
 `;
 
-const Navbar = () => {
+const Navbar = ({ cartQuantity }) => {
   return (
     <Nav>
       <SiteTitle to="/">Sike</SiteTitle>
       <Link to="/">Home</Link>
       <Link to="shop">Shop</Link>
-      <Link to="cart">Cart</Link>
+      <Link to="cart">{`Cart (${cartQuantity})`}</Link>
     </Nav>
   );
+};
+
+Navbar.propTypes = {
+  cartQuantity: PropTypes.number.isRequired,
 };
 
 export default Navbar;

@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useProducts from '../../hooks/useProducts.jsx';
-import QuantityInput from '../../components/QuantityInput/QuantityInput.jsx';
-import MainButton from '../../components/MainButton/MainButton.jsx';
+import QuantityForm from '../../components/QuantityForm/QuantityForm.jsx';
 
 const Wrapper = styled.div`
   display: grid;
@@ -45,13 +44,6 @@ const Sidebar = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 `;
 
 const Description = styled.p`
@@ -119,10 +111,7 @@ const Product = () => {
         </Picture>
         <H1>{product['node']['title']}</H1>
         <Sidebar>
-          <Form action="">
-            <QuantityInput />
-            <MainButton text={'Add to cart'} />
-          </Form>
+          <QuantityForm productId={productId} />
           <Description>{product['node']['description']}</Description>
         </Sidebar>
       </Wrapper>
