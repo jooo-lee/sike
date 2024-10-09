@@ -1,6 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import QuantityInput from '../QuantityInput/QuantityInput.jsx';
 import MainButton from '../MainButton/MainButton.jsx';
@@ -12,8 +13,18 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
+const AddedNotification = styled.p`
+  color: #0071e3;
+  display: flex;
+  align-items: center;
+
+  // Match height of add to cart button to prevent layout shift
+  height: 42px;
+`;
+
 const QuantityForm = ({ productId }) => {
   const { addToCart } = useOutletContext();
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,12 +32,18 @@ const QuantityForm = ({ productId }) => {
       productId,
       parseInt(e.currentTarget.elements.quantityInput.value)
     );
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 2500);
   };
 
   return (
     <Form onSubmit={handleSubmit} name="quantityForm" aria-label="quantityForm">
       <QuantityInput />
-      <MainButton text={'Add to cart'} />
+      {submitted ? (
+        <AddedNotification>Added to cart!</AddedNotification>
+      ) : (
+        <MainButton text={'Add to cart'} />
+      )}
     </Form>
   );
 };
