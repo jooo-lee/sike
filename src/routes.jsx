@@ -1,7 +1,7 @@
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import Shop from './pages/Shop/Shop.jsx';
-import Cart from './pages/Cart.jsx';
+import Cart from './pages/Cart/Cart.jsx';
 import Error from './pages/Error.jsx';
 import Product from './pages/Product/Product.jsx';
 
