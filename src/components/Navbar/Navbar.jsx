@@ -23,13 +23,17 @@ const Navbar = ({ cartQuantity }) => {
       <SiteTitle to="/">Sike</SiteTitle>
       <Link to="/">Home</Link>
       <Link to="shop">Shop</Link>
-      <Link to="cart">{`Cart (${cartQuantity})`}</Link>
+      <Link to="cart">
+        {cartQuantity != null && cartQuantity >= 0
+          ? `Cart (${cartQuantity})`
+          : 'Cart'}
+      </Link>
     </Nav>
   );
 };
 
 Navbar.propTypes = {
-  cartQuantity: PropTypes.number.isRequired,
+  cartQuantity: PropTypes.number,
 };
 
 export default Navbar;
