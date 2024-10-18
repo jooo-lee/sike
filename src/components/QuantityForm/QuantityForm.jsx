@@ -19,7 +19,7 @@ const AddedNotification = styled.p`
   align-items: center;
 
   // Match height of add to cart button to prevent layout shift
-  height: 42px;
+  height: 42.5px;
 `;
 
 const QuantityForm = ({ productId }) => {
