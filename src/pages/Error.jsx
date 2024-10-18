@@ -1,11 +1,14 @@
-import Navbar from '../components/Navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar.jsx';
+import GlobalStyle from '../globalStyles.js';
 
 const Error = () => {
   return (
-    <div>
+    <>
+      <GlobalStyle />
       <Navbar />
       <h1>Error!</h1>
-    </div>
+      <p>Something must have gone wrong...</p>
+    </>
   );
 };
 
