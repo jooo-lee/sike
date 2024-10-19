@@ -38,6 +38,7 @@ describe('cart page', () => {
       })
     );
 
+    // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
 
@@ -46,6 +47,35 @@ describe('cart page', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(dummyProduct2['node']['title'])
+    ).toBeInTheDocument();
+  });
+
+  it('updates total cart quantity when cart item quantity is updated', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    const input = screen.getByRole('spinbutton', {
+      name: /quantity/i,
+    });
+    await user.clear(input);
+    await user.type(input, '2[Tab]');
+
+    expect(
+      screen.getByRole('link', { name: /cart \(2\)/i })
     ).toBeInTheDocument();
   });
 });

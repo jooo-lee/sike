@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
@@ -46,35 +47,43 @@ const Input = styled.input`
   text-align: center;
   font-size: 1rem;
   height: 100%;
-  width: 4rem;
+  width: 3rem;
   border: 1px rgb(224, 224, 224);
   border-style: solid none;
+
+  @media (min-width: 768px) {
+    width: 4rem;
+  }
 `;
 
-const QuantityInput = () => {
-  const [value, setValue] = useState(1);
+const QuantityInput = ({ productId, initialQuantity, updateCart }) => {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleBlur = (e) => {
     if (e.target.value === '') {
-      setValue(1);
+      setQuantity(1);
+      if (updateCart) updateCart(productId, 1);
       return;
     }
 
-    const quantity = parseInt(e.target.value);
-
-    if (quantity < 1) {
-      setValue(1);
-    } else if (quantity > 5) {
-      setValue(5);
-    } else if (quantity >= 1 && quantity <= 5) {
-      setValue(quantity);
+    const parsedQuantity = parseInt(e.target.value);
+    if (parsedQuantity < 1) {
+      setQuantity(1);
+      if (updateCart) updateCart(productId, 1);
+    } else if (parsedQuantity > 5) {
+      setQuantity(5);
+      if (updateCart) updateCart(productId, 5);
+    } else if (parsedQuantity >= 1 && parsedQuantity <= 5) {
+      setQuantity(parsedQuantity);
+      if (updateCart) updateCart(productId, parsedQuantity);
     }
   };
 
   const handleIncrement = () => {
-    setValue((prevValue) => {
-      if (prevValue < 5) {
-        return prevValue + 1;
+    if (updateCart) updateCart(productId, quantity + 1);
+    setQuantity((prevQuantity) => {
+      if (prevQuantity < 5) {
+        return prevQuantity + 1;
       } else {
         return 5;
       }
@@ -82,33 +91,38 @@ const QuantityInput = () => {
   };
 
   const handleDecrement = () => {
-    setValue((prevValue) => {
-      if (prevValue > 1) {
-        return prevValue - 1;
+    if (updateCart) updateCart(productId, quantity - 1);
+    setQuantity((prevQuantity) => {
+      if (prevQuantity > 1) {
+        return prevQuantity - 1;
       } else {
         return 1;
       }
     });
   };
 
+  const handleChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
   return (
     <Wrapper>
-      <label htmlFor="quantityInput">Quantity:</label>
+      <label htmlFor={`quantityInput${productId}`}>Quantity:</label>
       <Div>
         <DecrementButton
           type="button"
           aria-label="Decrease quantity"
           onClick={handleDecrement}
-          disabled={value <= 1}>
+          disabled={quantity <= 1}>
           &minus;
         </DecrementButton>
         <Input
           pattern="[0-9]*"
-          id="quantityInput"
-          name="quantityInput"
+          id={`quantityInput${productId}`}
+          name={`quantityInput${productId}`}
           type="number"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={quantity}
+          onChange={handleChange}
           onBlur={handleBlur}
           required
         />
@@ -116,12 +130,18 @@ const QuantityInput = () => {
           type="button"
           aria-label="Increase quantity"
           onClick={handleIncrement}
-          disabled={value >= 5}>
+          disabled={quantity >= 5}>
           +
         </IncrementButton>
       </Div>
     </Wrapper>
   );
+};
+
+QuantityInput.propTypes = {
+  productId: PropTypes.string.isRequired,
+  initialQuantity: PropTypes.number.isRequired,
+  updateCart: PropTypes.func,
 };
 
 export default QuantityInput;

@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('quantity input', () => {
   it('renders input field', () => {
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -15,7 +15,7 @@ describe('quantity input', () => {
   });
 
   it('renders increase and decrease buttons', () => {
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
@@ -27,15 +27,15 @@ describe('quantity input', () => {
     expect(decreaseBtn).toBeInTheDocument();
   });
 
-  it('sets default quantity to 1', () => {
-    render(<QuantityInput />);
+  it('sets quantity to according to provided value', () => {
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
 
     expect(screen.getByDisplayValue('1')).toBeInTheDocument();
   });
 
   it('allows user to input integer quantity between and including 1 and 5', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -48,7 +48,7 @@ describe('quantity input', () => {
 
   it('rounds quantities less than 1 to 1', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -63,7 +63,7 @@ describe('quantity input', () => {
 
   it('rounds quantities greater than 5 to 5', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -78,7 +78,7 @@ describe('quantity input', () => {
 
   it('rounds non-integer quantities to nearest integer between and including 1 and 5', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -93,7 +93,7 @@ describe('quantity input', () => {
 
   it('increments quantity by 1 when increase button is clicked', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
@@ -107,7 +107,7 @@ describe('quantity input', () => {
 
   it('prevents quantity from incrementing above 5 when increase button is clicked', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -125,7 +125,7 @@ describe('quantity input', () => {
 
   it('decrements quantity by 1 when decrease button is clicked', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -143,7 +143,7 @@ describe('quantity input', () => {
 
   it('prevents quantity from decrementing below 1 when decrease button is clicked', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const decreaseBtn = screen.getByRole('button', {
       name: /decrease quantity/i,
     });
@@ -156,7 +156,7 @@ describe('quantity input', () => {
 
   it('prevents user from entering non-numeric characters', async () => {
     const user = userEvent.setup();
-    render(<QuantityInput />);
+    render(<QuantityInput productId="quantityInput" initialQuantity={1} />);
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });

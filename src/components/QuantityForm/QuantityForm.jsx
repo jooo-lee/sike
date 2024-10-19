@@ -22,6 +22,7 @@ const AddedNotification = styled.p`
   height: 42px;
 `;
 
+// Form to add product to cart from product page
 const QuantityForm = ({ productId }) => {
   const { addToCart } = useOutletContext();
   const [submitted, setSubmitted] = useState(false);
@@ -30,7 +31,9 @@ const QuantityForm = ({ productId }) => {
     e.preventDefault();
     addToCart(
       productId,
-      parseInt(e.currentTarget.elements.quantityInput.value)
+      parseInt(
+        e['currentTarget']['elements'][`quantityInput${productId}`]['value']
+      )
     );
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 2500);
@@ -38,7 +41,7 @@ const QuantityForm = ({ productId }) => {
 
   return (
     <Form onSubmit={handleSubmit} name="quantityForm" aria-label="quantityForm">
-      <QuantityInput />
+      <QuantityInput productId={productId} initialQuantity={1} />
       {submitted ? (
         <AddedNotification>Added to cart!</AddedNotification>
       ) : (
