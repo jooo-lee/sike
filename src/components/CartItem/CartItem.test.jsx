@@ -47,6 +47,7 @@ describe('cart item', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const productImage = screen.getByTestId(
       dummyProduct['node']['featuredImage']['id']
     );
@@ -71,6 +72,7 @@ describe('cart item', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const productPrice = screen.getByText(
       `CAD $${Number.parseFloat(
         dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
@@ -102,6 +104,7 @@ describe('cart item', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const cartItemInput = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
