@@ -22,28 +22,69 @@ const AddedNotification = styled.p`
   height: 42.5px;
 `;
 
+// Form to add product to cart from product page
 const QuantityForm = ({ productId }) => {
-  const { addToCart } = useOutletContext();
+  const { cart, addToCart } = useOutletContext();
   const [submitted, setSubmitted] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  const productInCart = cart.find((cartItem) => cartItem.id === productId);
+  const quantityInCart = productInCart ? productInCart.quantity : 0;
+  const limitReached = 5 - quantityInCart <= 0;
+  const maxQuantity = 5 - quantityInCart;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addToCart(
       productId,
-      parseInt(e.currentTarget.elements.quantityInput.value)
+      parseInt(
+        e['currentTarget']['elements'][`quantityInput${productId}`]['value']
+      )
     );
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2500);
+    setTimeout(() => {
+      setSubmitted(false);
+      setQuantity(1);
+    }, 2500);
   };
+
+  if (submitted) {
+    return (
+      <Form
+        onSubmit={handleSubmit}
+        name="quantityForm"
+        aria-label="quantityForm">
+        <QuantityInput
+          quantity={quantity}
+          setQuantity={setQuantity}
+          productId={productId}
+          maxQuantity={maxQuantity}
+        />
+        <AddedNotification>Added to cart!</AddedNotification>
+      </Form>
+    );
+  }
+
+  if (limitReached) {
+    return (
+      <Form
+        onSubmit={handleSubmit}
+        name="quantityForm"
+        aria-label="quantityForm">
+        <MainButton text={'Limit reached'} disabled={true} />
+      </Form>
+    );
+  }
 
   return (
     <Form onSubmit={handleSubmit} name="quantityForm" aria-label="quantityForm">
-      <QuantityInput />
-      {submitted ? (
-        <AddedNotification>Added to cart!</AddedNotification>
-      ) : (
-        <MainButton text={'Add to cart'} />
-      )}
+      <QuantityInput
+        quantity={quantity}
+        setQuantity={setQuantity}
+        productId={productId}
+        maxQuantity={maxQuantity}
+      />
+      <MainButton text={'Add to cart'} />
     </Form>
   );
 };

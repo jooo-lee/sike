@@ -10,11 +10,23 @@ const dummyProduct = dummyData['data']['products']['edges'][0];
 
 describe('quantity input', () => {
   it('renders input field', async () => {
+    const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
@@ -22,14 +34,26 @@ describe('quantity input', () => {
   });
 
   it('renders increase and decrease buttons', async () => {
+    const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const increaseBtn = await screen.findByRole('button', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
-    const decreaseBtn = await screen.findByRole('button', {
+    const decreaseBtn = screen.getByRole('button', {
       name: /decrease quantity/i,
     });
 
@@ -43,7 +67,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
@@ -59,7 +94,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
@@ -77,7 +123,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
@@ -95,7 +152,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
@@ -113,7 +181,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const increaseBtn = await screen.findByRole('button', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
 
@@ -130,10 +209,21 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
-    const increaseBtn = await screen.findByRole('button', {
+    const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
 
@@ -151,10 +241,21 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
-    const decreaseBtn = await screen.findByRole('button', {
+    const decreaseBtn = screen.getByRole('button', {
       name: /decrease quantity/i,
     });
 
@@ -172,7 +273,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const decreaseBtn = await screen.findByRole('button', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const decreaseBtn = screen.getByRole('button', {
       name: /decrease quantity/i,
     });
 
@@ -188,7 +300,18 @@ describe('quantity input', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = await screen.findByRole('spinbutton', {
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+    const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 

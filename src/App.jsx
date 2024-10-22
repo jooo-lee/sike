@@ -8,7 +8,7 @@ const App = () => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (productId, quantity) => {
-    // If product is already in the cart, just update its quantity
+    // If product is already in the cart, add new quantity to previous quantity
     if (cart.some((product) => product.id === productId)) {
       setCart(
         cart.map((product) => {
@@ -24,13 +24,26 @@ const App = () => {
     }
   };
 
+  // Update quantity of product already in cart
+  const updateCart = (productId, quantity) => {
+    setCart(
+      cart.map((product) => {
+        if (product.id === productId) {
+          return { ...product, quantity: quantity };
+        } else {
+          return product;
+        }
+      })
+    );
+  };
+
   return (
     <>
       <GlobalStyle />
       <Navbar
         cartQuantity={cart.reduce((acc, product) => acc + product.quantity, 0)}
       />
-      <Outlet context={{ cart, addToCart }} />
+      <Outlet context={{ cart, addToCart, updateCart }} />
     </>
   );
 };
