@@ -17,13 +17,18 @@ const Button = styled.button`
   }
 `;
 
-const MainButton = ({ text, type = 'submit' }) => {
-  return <Button type={type}>{text}</Button>;
+const MainButton = ({ text, type = 'submit', disabled = false }) => {
+  return (
+    <Button type={type} disabled={disabled}>
+      {text}
+    </Button>
+  );
 };
 
 MainButton.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  disabled: PropTypes.bool,
 };
 
 export default MainButton;

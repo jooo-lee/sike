@@ -80,14 +80,19 @@ describe('cart item', () => {
     expect(productPrice).toBeInTheDocument();
   });
 
-  it('renders product quantity input field', async () => {
+  it('renders product quantity input field with correct quantity', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
+    const productPageInput = screen.getByRole('spinbutton', {
+      name: /quantity/i,
+    });
 
-    // Add product to cart
+    // Add 3 of product to cart
+    await user.clear(productPageInput);
+    await user.type(productPageInput, '3');
     await user.click(
       await screen.findByRole('button', {
         name: /add to cart/i,
@@ -97,11 +102,12 @@ describe('cart item', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
-    const input = screen.getByRole('spinbutton', {
+    const cartItemInput = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
 
-    expect(input).toBeInTheDocument();
+    expect(cartItemInput).toBeInTheDocument();
+    expect(screen.getByDisplayValue('3')).toBeInTheDocument();
   });
 
   it('renders remove item from cart button');

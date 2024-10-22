@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import QuantityInput from '../QuantityInput/QuantityInput.jsx';
+import CartItemQuantity from '../CartItemQuantity/CartItemQuantity.jsx';
 
 const Card = styled.div`
   display: flex;
@@ -32,8 +32,6 @@ const Title = styled(Link)`
 `;
 
 const CartItem = ({ product, imgSize = 100 }) => {
-  const { cart, updateCart } = useOutletContext();
-
   return (
     <Card>
       <Image to={`/product/${product['node']['id'].slice(22)}`}>
@@ -69,15 +67,7 @@ const CartItem = ({ product, imgSize = 100 }) => {
             ).toFixed(2)}
           </p>
         </div>
-        <QuantityInput
-          productId={product['node']['id'].slice(22)}
-          initialQuantity={
-            cart.find(
-              (cartItem) => cartItem.id === product['node']['id'].slice(22)
-            ).quantity
-          }
-          updateCart={updateCart}
-        />
+        <CartItemQuantity productId={product['node']['id'].slice(22)} />
       </Info>
     </Card>
   );

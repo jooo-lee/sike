@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -55,24 +57,34 @@ const Input = styled.input`
   }
 `;
 
-const QuantityInput = ({ quantity, setQuantity, productId, maxQuantity }) => {
+const CartItemQuantity = ({ productId, maxQuantity = 5 }) => {
+  const { cart, updateCart } = useOutletContext();
+  const [quantity, setQuantity] = useState(
+    () => cart.find((cartItem) => cartItem.id === productId).quantity
+  );
+
   const handleBlur = (e) => {
     if (e.target.value === '') {
       setQuantity(1);
+      updateCart(productId, 1);
       return;
     }
 
     const parsedQuantity = parseInt(e.target.value);
     if (parsedQuantity < 1) {
       setQuantity(1);
+      updateCart(productId, 1);
     } else if (parsedQuantity > maxQuantity) {
       setQuantity(maxQuantity);
+      updateCart(productId, maxQuantity);
     } else if (parsedQuantity >= 1 && parsedQuantity <= maxQuantity) {
       setQuantity(parsedQuantity);
+      updateCart(productId, parsedQuantity);
     }
   };
 
   const handleIncrement = () => {
+    updateCart(productId, quantity + 1);
     setQuantity((prevQuantity) => {
       if (prevQuantity < maxQuantity) {
         return prevQuantity + 1;
@@ -83,6 +95,7 @@ const QuantityInput = ({ quantity, setQuantity, productId, maxQuantity }) => {
   };
 
   const handleDecrement = () => {
+    updateCart(productId, quantity - 1);
     setQuantity((prevQuantity) => {
       if (prevQuantity > 1) {
         return prevQuantity - 1;
@@ -98,7 +111,7 @@ const QuantityInput = ({ quantity, setQuantity, productId, maxQuantity }) => {
 
   return (
     <Wrapper>
-      <label htmlFor={`quantityInput${productId}`}>Quantity:</label>
+      <label htmlFor={`cartItemQuantity${productId}`}>Quantity:</label>
       <Div>
         <DecrementButton
           type="button"
@@ -109,8 +122,8 @@ const QuantityInput = ({ quantity, setQuantity, productId, maxQuantity }) => {
         </DecrementButton>
         <Input
           pattern="[0-9]*"
-          id={`quantityInput${productId}`}
-          name={`quantityInput${productId}`}
+          id={`cartItemQuantity${productId}`}
+          name={`cartItemQuantity${productId}`}
           type="number"
           value={quantity}
           onChange={handleChange}
@@ -129,12 +142,9 @@ const QuantityInput = ({ quantity, setQuantity, productId, maxQuantity }) => {
   );
 };
 
-QuantityInput.propTypes = {
-  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  setQuantity: PropTypes.func.isRequired,
+CartItemQuantity.propTypes = {
   productId: PropTypes.string.isRequired,
-  maxQuantity: PropTypes.number.isRequired,
+  maxQuantity: PropTypes.number,
 };
 
-export default QuantityInput;
+export default CartItemQuantity;

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   render,
   screen,
@@ -113,5 +113,81 @@ describe('product page', () => {
     expect(
       screen.getByRole('link', { name: /cart \(3\)/i })
     ).toBeInTheDocument();
+  });
+
+  it('displays default quantity value of 1', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    expect(screen.getByDisplayValue('1')).toBeInTheDocument();
+  });
+
+  it('updates input value to 1, 2.5 seconds after product is added to cart', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const input = screen.getByRole('spinbutton', {
+      name: /quantity/i,
+    });
+    const addToCartBtn = screen.getByRole('button', {
+      name: /add to cart/i,
+    });
+
+    // Add 3 of current product to cart
+    await user.clear(input);
+    await user.type(input, '3');
+    await user.click(addToCartBtn);
+
+    vi.advanceTimersByTime(2500);
+
+    // Need to await after advancing Vitest timers
+    expect(await screen.findByDisplayValue('1')).toBeInTheDocument();
+
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
+  });
+
+  it('only allows maximum of 5 of same product to be added', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const input = screen.getByRole('spinbutton', {
+      name: /quantity/i,
+    });
+    const addToCartBtn = screen.getByRole('button', {
+      name: /add to cart/i,
+    });
+
+    // Add 3 of current product to cart
+    await user.clear(input);
+    await user.type(input, '3');
+    await user.click(addToCartBtn);
+
+    // Wait for add to cart button to reappear
+    vi.advanceTimersByTime(2500);
+
+    // Attempt to add 4 more of current product to cart
+    await user.clear(input);
+    await user.type(input, '4');
+    await user.click(
+      screen.getByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    expect(
+      screen.getByRole('link', { name: /cart \(5\)/i })
+    ).toBeInTheDocument();
+
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
   });
 });
