@@ -37,13 +37,17 @@ const App = () => {
     );
   };
 
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((product) => product.id != productId));
+  };
+
   return (
     <>
       <GlobalStyle />
       <Navbar
         cartQuantity={cart.reduce((acc, product) => acc + product.quantity, 0)}
       />
-      <Outlet context={{ cart, addToCart, updateCart }} />
+      <Outlet context={{ cart, addToCart, updateCart, removeFromCart }} />
     </>
   );
 };

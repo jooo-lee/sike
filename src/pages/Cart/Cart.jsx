@@ -13,7 +13,7 @@ const CartItems = styled.div`
 `;
 
 const Cart = () => {
-  const { cart } = useOutletContext();
+  const { cart, removeFromCart } = useOutletContext();
   const { products, error, loading } = useProducts();
 
   if (loading)
@@ -54,7 +54,11 @@ const Cart = () => {
       <h1>Cart</h1>
       <CartItems>
         {productsInCart.map((product) => (
-          <CartItem key={product['node']['id']} product={product} />
+          <CartItem
+            key={product['node']['id']}
+            product={product}
+            removeFromCart={removeFromCart}
+          />
         ))}
       </CartItems>
     </>

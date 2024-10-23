@@ -113,5 +113,30 @@ describe('cart item', () => {
     expect(screen.getByDisplayValue('3')).toBeInTheDocument();
   });
 
-  it('renders remove item from cart button');
+  it('allows user to remove item from cart', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    // Click delete button
+    const deleteBtn = screen.getByRole('button', { name: /remove from cart/i });
+    await user.click(deleteBtn);
+
+    expect(
+      screen.queryByText(`${dummyProduct['node']['title']}`)
+    ).not.toBeInTheDocument();
+  });
 });
