@@ -78,4 +78,36 @@ describe('cart page', () => {
       screen.getByRole('link', { name: /cart \(2\)/i })
     ).toBeInTheDocument();
   });
+
+  it('displays cart empty message when no products are in cart', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/cart'],
+    });
+    render(<RouterProvider router={router} />);
+    const message = screen.getByText(/Your cart is currently empty./i);
+
+    expect(message).toBeInTheDocument();
+  });
+
+  it('does not display cart empty message when products are in cart', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    const message = screen.queryByText(/Your cart is currently empty./i);
+    expect(message).not.toBeInTheDocument();
+  });
 });

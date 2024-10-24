@@ -49,6 +49,15 @@ const Cart = () => {
     productsInCart.push(product);
   });
 
+  if (cart.length === 0) {
+    return (
+      <>
+        <h1>Cart</h1>
+        <p>Your cart is currently empty.</p>
+      </>
+    );
+  }
+
   return (
     <>
       <h1>Cart</h1>
