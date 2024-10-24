@@ -51,6 +51,7 @@ const Input = styled.input`
   width: 3rem;
   border: 1px rgb(224, 224, 224);
   border-style: solid none;
+  border-radius: 0;
 
   @media (min-width: 768px) {
     width: 4rem;

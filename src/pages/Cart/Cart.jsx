@@ -4,16 +4,22 @@ import styled from 'styled-components';
 
 import CartItem from '../../components/CartItem/CartItem.jsx';
 import useProducts from '../../hooks/useProducts.jsx';
+import MainButton from '../../components/MainButton/MainButton.jsx';
 
 const CartItems = styled.div`
   width: min(500px, 100%);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 400px) {
+    gap: 2rem;
+  }
 `;
 
 const Cart = () => {
-  const { cart } = useOutletContext();
+  const { cart, removeFromCart, resetCart } = useOutletContext();
   const { products, error, loading } = useProducts();
 
   if (loading)
@@ -49,14 +55,35 @@ const Cart = () => {
     productsInCart.push(product);
   });
 
+  if (cart.length === 0) {
+    return (
+      <>
+        <h1>Cart</h1>
+        <p>Your cart is currently empty.</p>
+      </>
+    );
+  }
+
   return (
     <>
       <h1>Cart</h1>
       <CartItems>
         {productsInCart.map((product) => (
-          <CartItem key={product['node']['id']} product={product} />
+          <CartItem
+            key={product['node']['id']}
+            product={product}
+            removeFromCart={removeFromCart}
+          />
         ))}
       </CartItems>
+      <MainButton
+        text="Checkout"
+        type="button"
+        onClick={() => {
+          alert('You have checked out! Thank you for shopping with us.');
+          resetCart();
+        }}
+      />
     </>
   );
 };

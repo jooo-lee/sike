@@ -26,6 +26,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -50,6 +51,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
@@ -78,6 +80,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -105,6 +108,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -134,6 +138,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -163,6 +168,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -192,6 +198,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const increaseBtn = screen.getByRole('button', {
       name: /increase quantity/i,
     });
@@ -220,6 +227,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -252,6 +260,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });
@@ -284,6 +293,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const decreaseBtn = screen.getByRole('button', {
       name: /decrease quantity/i,
     });
@@ -311,6 +321,7 @@ describe('quantity input', () => {
     // Go to cart
     const cartLink = screen.getByRole('link', { name: /cart/i });
     await user.click(cartLink);
+
     const input = screen.getByRole('spinbutton', {
       name: /quantity/i,
     });

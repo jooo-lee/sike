@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Icon from '@mdi/react';
+import { mdiTrashCanOutline } from '@mdi/js';
 
 import CartItemQuantity from '../CartItemQuantity/CartItemQuantity.jsx';
 
 const Card = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
 `;
 
 const Image = styled(Link)`
@@ -31,7 +34,20 @@ const Title = styled(Link)`
   }
 `;
 
-const CartItem = ({ product, imgSize = 100 }) => {
+const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CartItem = ({ product, imgSize = 100, removeFromCart }) => {
   return (
     <Card>
       <Image to={`/product/${product['node']['id'].slice(22)}`}>
@@ -40,7 +56,9 @@ const CartItem = ({ product, imgSize = 100 }) => {
         <picture>
           <source
             media="(max-width: 400px)"
-            srcSet={`${product['node']['featuredImage']['url']}&width=${imgSize}&height=${imgSize}`}
+            srcSet={`${product['node']['featuredImage']['url']}&width=${
+              imgSize + 100
+            }&height=${imgSize + 100}`}
             width={imgSize}
             height={imgSize}
           />
@@ -69,6 +87,16 @@ const CartItem = ({ product, imgSize = 100 }) => {
         </div>
         <CartItemQuantity productId={product['node']['id'].slice(22)} />
       </Info>
+      <DeleteButton
+        type="button"
+        onClick={() => removeFromCart(product['node']['id'].slice(22))}>
+        <Icon
+          path={mdiTrashCanOutline}
+          title="Remove from cart"
+          size={1}
+          color="black"
+        />
+      </DeleteButton>
     </Card>
   );
 };
@@ -76,6 +104,7 @@ const CartItem = ({ product, imgSize = 100 }) => {
 CartItem.propTypes = {
   product: PropTypes.object.isRequired,
   imgSize: PropTypes.number,
+  removeFromCart: PropTypes.func.isRequired,
 };
 
 export default CartItem;

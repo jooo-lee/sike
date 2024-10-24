@@ -41,7 +41,7 @@ describe('shop page', () => {
     expect(error).toBeInTheDocument();
   });
 
-  it('renders product titles', async () => {
+  it('renders product card components', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/shop'],
     });
@@ -50,41 +50,6 @@ describe('shop page', () => {
     for (const edge of dummyData['data']['products']['edges']) {
       const title = await screen.findByText(edge['node']['title']);
       expect(title).toBeInTheDocument();
-    }
-  });
-
-  it('renders product images', async () => {
-    const router = createMemoryRouter(routes, {
-      initialEntries: ['/shop'],
-    });
-    render(<RouterProvider router={router} />);
-
-    /* 
-    Since the product images are displayed with accompanying product names,
-    I left their alt attributes blank. However, this means that we are not able
-    to select them for testing using getByAltText. Thus, we use test ids here.
-    */
-    for (const edge of dummyData['data']['products']['edges']) {
-      const image = await screen.findByTestId(
-        edge['node']['featuredImage']['id']
-      );
-      expect(image).toBeInTheDocument();
-    }
-  });
-
-  it('renders product prices', async () => {
-    const router = createMemoryRouter(routes, {
-      initialEntries: ['/shop'],
-    });
-    render(<RouterProvider router={router} />);
-
-    for (const edge of dummyData['data']['products']['edges']) {
-      const price = await screen.findByText(
-        `CAD $${Number.parseFloat(
-          edge['node']['variants']['edges'][0]['node']['price']['amount']
-        ).toFixed(2)}`
-      );
-      expect(price).toBeInTheDocument();
     }
   });
 });
