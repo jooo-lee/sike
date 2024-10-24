@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import CartItem from '../../components/CartItem/CartItem.jsx';
 import useProducts from '../../hooks/useProducts.jsx';
+import MainButton from '../../components/MainButton/MainButton.jsx';
 
 const CartItems = styled.div`
   width: min(500px, 100%);
@@ -13,7 +14,7 @@ const CartItems = styled.div`
 `;
 
 const Cart = () => {
-  const { cart, removeFromCart } = useOutletContext();
+  const { cart, removeFromCart, resetCart } = useOutletContext();
   const { products, error, loading } = useProducts();
 
   if (loading)
@@ -70,6 +71,14 @@ const Cart = () => {
           />
         ))}
       </CartItems>
+      <MainButton
+        text="Checkout"
+        type="button"
+        onClick={() => {
+          alert('You have checked out! Thank you for shopping with us.');
+          resetCart();
+        }}
+      />
     </>
   );
 };

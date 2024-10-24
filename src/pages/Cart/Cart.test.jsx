@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -109,5 +109,31 @@ describe('cart page', () => {
 
     const message = screen.queryByText(/Your cart is currently empty./i);
     expect(message).not.toBeInTheDocument();
+  });
+
+  it('alerts user that they have checked out', async () => {
+    const spy = vi.spyOn(window, 'alert').mockImplementationOnce(() => {});
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    // Check out
+    const checkout = screen.getByRole('button', { name: /checkout/i });
+    await user.click(checkout);
+
+    expect(spy).toHaveBeenCalledOnce();
   });
 });
