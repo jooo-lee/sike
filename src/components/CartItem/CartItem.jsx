@@ -9,6 +9,7 @@ import CartItemQuantity from '../CartItemQuantity/CartItemQuantity.jsx';
 const Card = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
 `;
 
 const Image = styled(Link)`
@@ -30,6 +31,19 @@ const Title = styled(Link)`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 2px;
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -73,7 +87,7 @@ const CartItem = ({ product, imgSize = 100, removeFromCart }) => {
         </div>
         <CartItemQuantity productId={product['node']['id'].slice(22)} />
       </Info>
-      <button
+      <DeleteButton
         type="button"
         onClick={() => removeFromCart(product['node']['id'].slice(22))}>
         <Icon
@@ -82,7 +96,7 @@ const CartItem = ({ product, imgSize = 100, removeFromCart }) => {
           size={1}
           color="black"
         />
-      </button>
+      </DeleteButton>
     </Card>
   );
 };

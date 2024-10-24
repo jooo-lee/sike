@@ -45,6 +45,14 @@ const GlobalStyle = createGlobalStyle`
   img {
     border-radius: 8px;
   }
+
+  button {
+    color: black;
+  }
+
+  button:disabled {
+    color: rgb(224, 224, 224);
+  }
 `;
 
 export default GlobalStyle;

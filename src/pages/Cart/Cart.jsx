@@ -11,6 +11,11 @@ const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 400px) {
+    gap: 2rem;
+  }
 `;
 
 const Cart = () => {
