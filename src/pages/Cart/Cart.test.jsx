@@ -10,7 +10,7 @@ const dummyProduct1 = dummyData['data']['products']['edges'][0];
 const dummyProduct2 = dummyData['data']['products']['edges'][1];
 
 describe('cart page', () => {
-  it('renders names of products in cart', async () => {
+  it('renders cart items', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
