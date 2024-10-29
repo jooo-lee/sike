@@ -49,10 +49,6 @@ const GlobalStyle = createGlobalStyle`
   button {
     color: black;
   }
-
-  button:disabled {
-    color: rgb(224, 224, 224);
-  }
 `;
 
 export default GlobalStyle;

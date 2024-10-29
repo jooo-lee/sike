@@ -12,7 +12,11 @@ const Button = styled.button`
   outline-offset: 4px;
   transition: background-color 0.5s;
 
-  &:hover {
+  &:disabled {
+    opacity: 50%;
+  }
+
+  &:hover:not(:disabled) {
     cursor: pointer;
     background-color: #0145b7;
   }

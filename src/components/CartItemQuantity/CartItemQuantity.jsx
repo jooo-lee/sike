@@ -22,7 +22,11 @@ const quantityButtonStyle = css`
   background-color: white;
   border: 1px solid rgb(224, 224, 224);
 
-  &:hover {
+  &:disabled {
+    color: rgb(224, 224, 224);
+  }
+
+  &:hover:not(:disabled) {
     cursor: pointer;
   }
 `;
