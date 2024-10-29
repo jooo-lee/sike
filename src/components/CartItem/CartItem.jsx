@@ -39,8 +39,8 @@ const DeleteButton = styled.button`
   align-items: center;
   background-color: white;
   border-radius: 5px;
-  border: 1px solid black;
-  padding: 2px;
+  border: 1px solid rgb(224, 224, 224);
+  padding: 4px;
 
   &:hover {
     cursor: pointer;
