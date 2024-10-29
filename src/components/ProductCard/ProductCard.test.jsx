@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import ProductCard from './ProductCard.jsx';
 import dummyData from '../../dummyData.js';
@@ -10,9 +10,9 @@ const dummyProduct = dummyData['data']['products']['edges'][0];
 describe('product card', () => {
   it('renders product image', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <ProductCard product={dummyProduct} />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     const productImage = screen.getByTestId(
       dummyProduct['node']['featuredImage']['id']
@@ -23,9 +23,9 @@ describe('product card', () => {
 
   it('renders product name', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <ProductCard product={dummyProduct} />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     const productTitle = screen.getByText(dummyProduct['node']['title']);
 
@@ -34,9 +34,9 @@ describe('product card', () => {
 
   it('renders product price with two decimal places', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <ProductCard product={dummyProduct} />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     const productPrice = screen.getByText(
       `CAD $${Number.parseFloat(

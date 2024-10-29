@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import Navbar from './Navbar.jsx';
 
 describe('navbar', () => {
   it('renders a nav element with correct heading and links', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Navbar />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     const nav = screen.getByRole('navigation');
     const siteTitle = screen.getByRole('link', { name: /sike/i });
