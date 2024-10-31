@@ -10,6 +10,16 @@ const dummyProduct1 = dummyData['data']['products']['edges'][0];
 const dummyProduct2 = dummyData['data']['products']['edges'][1];
 
 describe('cart page', () => {
+  it('renders page heading', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/cart'],
+    });
+    render(<RouterProvider router={router} />);
+    const heading = screen.getByRole('heading', { name: /cart/i });
+
+    expect(heading).toBeInTheDocument();
+  });
+
   it('renders cart items', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {

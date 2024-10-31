@@ -41,6 +41,16 @@ describe('shop page', () => {
     expect(error).toBeInTheDocument();
   });
 
+  it('renders page heading', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/shop'],
+    });
+    render(<RouterProvider router={router} />);
+    const heading = screen.getByRole('heading', { name: /shop/i });
+
+    expect(heading).toBeInTheDocument();
+  });
+
   it('renders product card components', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/shop'],
