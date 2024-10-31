@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Button = styled.button`
+  width: fit-content;
   font-size: 1rem;
   font-weight: 550;
   padding: 0.75rem 1rem;

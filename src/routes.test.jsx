@@ -77,4 +77,17 @@ describe('routes', () => {
       screen.getByRole('heading', { name: productName, level: 1 })
     ).toBeInTheDocument();
   });
+
+  it("navigates to shop page when 'start shopping' button is clicked", async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/'],
+    });
+    render(<RouterProvider router={router} />);
+    const button = screen.getByRole('button', { name: /start shopping/i });
+
+    await user.click(button);
+
+    expect(screen.getByRole('heading', { name: /shop/i })).toBeInTheDocument();
+  });
 });
