@@ -30,7 +30,6 @@ describe('product page', () => {
   });
 
   it('renders error message', async () => {
-    window.localStorage.clear();
     window.fetch.mockImplementationOnce(() => {
       return Promise.reject('API is down!');
     });
@@ -99,7 +98,7 @@ describe('product page', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = screen.getByRole('spinbutton', {
+    const input = await screen.findByRole('spinbutton', {
       name: /quantity/i,
     });
     const addToCartBtn = await screen.findByRole('button', {
@@ -115,13 +114,13 @@ describe('product page', () => {
     ).toBeInTheDocument();
   });
 
-  it('displays default quantity value of 1', () => {
+  it('displays default quantity value of 1', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
 
-    expect(screen.getByDisplayValue('1')).toBeInTheDocument();
+    expect(await screen.findByDisplayValue('1')).toBeInTheDocument();
   });
 
   it('updates input value to 1, 2.5 seconds after product is added to cart', async () => {
@@ -131,10 +130,10 @@ describe('product page', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = screen.getByRole('spinbutton', {
+    const input = await screen.findByRole('spinbutton', {
       name: /quantity/i,
     });
-    const addToCartBtn = screen.getByRole('button', {
+    const addToCartBtn = await screen.findByRole('button', {
       name: /add to cart/i,
     });
 
@@ -159,10 +158,10 @@ describe('product page', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const input = screen.getByRole('spinbutton', {
+    const input = await screen.findByRole('spinbutton', {
       name: /quantity/i,
     });
-    const addToCartBtn = screen.getByRole('button', {
+    const addToCartBtn = await screen.findByRole('button', {
       name: /add to cart/i,
     });
 

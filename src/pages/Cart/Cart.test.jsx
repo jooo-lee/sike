@@ -89,12 +89,12 @@ describe('cart page', () => {
     ).toBeInTheDocument();
   });
 
-  it('displays cart empty message when no products are in cart', () => {
+  it('displays cart empty message when no products are in cart', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/cart'],
     });
     render(<RouterProvider router={router} />);
-    const message = screen.getByText(/Your cart is currently empty./i);
+    const message = await screen.findByText(/Your cart is currently empty./i);
 
     expect(message).toBeInTheDocument();
   });

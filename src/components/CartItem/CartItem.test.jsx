@@ -88,7 +88,7 @@ describe('cart item', () => {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
     });
     render(<RouterProvider router={router} />);
-    const productPageInput = screen.getByRole('spinbutton', {
+    const productPageInput = await screen.findByRole('spinbutton', {
       name: /quantity/i,
     });
 
