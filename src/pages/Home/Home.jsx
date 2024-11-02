@@ -20,6 +20,27 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <Content>
+        <picture>
+          <source
+            media="(max-width: 350px)"
+            srcSet="/sweatpants.webp"
+            width="200"
+            height="200"
+          />
+          <source
+            media="(max-width: 450px)"
+            srcSet="/sweatpants.webp"
+            width="250"
+            height="250"
+          />
+          <img
+            src="/sweatpants.webp"
+            alt=""
+            width="300"
+            height="300"
+            data-testid="home-image"
+          />
+        </picture>
         <p>Welcome to Sike! Like Nike but worse quality.</p>
         <MainButton text="Start shopping" onClick={() => navigate('/shop')} />
       </Content>

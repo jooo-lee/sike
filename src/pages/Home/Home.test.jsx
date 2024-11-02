@@ -15,6 +15,16 @@ describe('home page', () => {
     expect(heading).toBeInTheDocument();
   });
 
+  it('renders decorative product image', () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: ['/'],
+    });
+    render(<RouterProvider router={router} />);
+    const image = screen.getByTestId('home-image');
+
+    expect(image).toBeInTheDocument();
+  });
+
   it('renders welcome text', () => {
     const router = createMemoryRouter(routes, {
       initialEntries: ['/'],
