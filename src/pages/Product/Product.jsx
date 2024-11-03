@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   @media (min-width: 950px) {
     height: 100%;
     grid-template-areas:
-      'image title'
+      'image sidebar'
       'image sidebar';
   }
 `;
@@ -30,26 +30,26 @@ const Picture = styled.picture`
   }
 `;
 
-const H1 = styled.h1`
-  grid-area: title;
-  margin-bottom: 0;
-  @media (min-width: 950px) {
-    align-self: end;
-  }
-`;
-
 const Sidebar = styled.div`
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+`;
+
+const H1 = styled.h1`
+  margin-bottom: 0.5rem;
+`;
+
+const Price = styled.p`
+  text-align: center;
 `;
 
 const Description = styled.p`
   max-width: 400px;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 1rem 1rem 0 1rem;
 `;
 
 const Product = () => {
@@ -109,8 +109,18 @@ const Product = () => {
             height="400"
           />
         </Picture>
-        <H1>{product['node']['title']}</H1>
         <Sidebar>
+          <div>
+            <H1>{product['node']['title']}</H1>
+            <Price>
+              CAD $
+              {Number.parseFloat(
+                product['node']['variants']['edges'][0]['node']['price'][
+                  'amount'
+                ]
+              ).toFixed(2)}
+            </Price>
+          </div>
           <QuantityForm productId={productId} />
           <Description>{product['node']['description']}</Description>
         </Sidebar>

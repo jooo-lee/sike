@@ -69,6 +69,20 @@ describe('product page', () => {
     expect(image).toBeInTheDocument();
   });
 
+  it('renders product price', async () => {
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+    const price = await screen.findByText(
+      `CAD $${Number.parseFloat(
+        dummyProduct['node']['variants']['edges'][0]['node']['price']['amount']
+      ).toFixed(2)}`
+    );
+
+    expect(price).toBeInTheDocument();
+  });
+
   it('renders product description', async () => {
     const router = createMemoryRouter(routes, {
       initialEntries: [`/product/${dummyProduct['node']['id'].slice(22)}`],
