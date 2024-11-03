@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import MainButton from '../../components/MainButton/MainButton.jsx';
 
 const Content = styled.div`
-  height: 100%;
   text-align: center;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
 `;
