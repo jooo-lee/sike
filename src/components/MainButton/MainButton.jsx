@@ -18,9 +18,11 @@ const Button = styled.button`
     opacity: 50%;
   }
 
-  &:hover:not(:disabled) {
-    cursor: pointer;
-    background-color: #0145b7;
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      cursor: pointer;
+      background-color: #0145b7;
+    }
   }
 `;
 
