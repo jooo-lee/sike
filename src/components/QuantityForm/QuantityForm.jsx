@@ -13,13 +13,16 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
-const AddedNotification = styled.p`
+// Matches dimensions of MainButton to prevent layout shift
+const AddedNotification = styled.button`
+  width: fit-content;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: white;
   color: #0071e3;
-  display: flex;
-  align-items: center;
-
-  // Match height of add to cart button to prevent layout shift
-  height: 42.5px;
+  border: none;
+  border-radius: 980px;
+  outline-offset: 4px;
 `;
 
 // Form to add product to cart from product page
@@ -60,7 +63,7 @@ const QuantityForm = ({ productId }) => {
           productId={productId}
           maxQuantity={maxQuantity}
         />
-        <AddedNotification>Added to cart!</AddedNotification>
+        <AddedNotification disabled>Added to cart!</AddedNotification>
       </Form>
     );
   }

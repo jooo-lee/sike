@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+// Matches dimensions of AddedNotification in QuantityForm to prevent layout shift
 const Button = styled.button`
   width: fit-content;
   font-size: 1rem;
