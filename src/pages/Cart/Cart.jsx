@@ -11,11 +11,15 @@ const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   @media (max-width: 400px) {
     gap: 2rem;
   }
+`;
+
+const TotalPrice = styled.div`
+  font-weight: bold;
 `;
 
 const Cart = () => {
@@ -47,14 +51,6 @@ const Cart = () => {
       </>
     );
 
-  const productsInCart = [];
-  cart.forEach((cartItem) => {
-    const product = products.find(
-      (product) => product['node']['id'].slice(22) === cartItem.id
-    );
-    productsInCart.push(product);
-  });
-
   if (cart.length === 0) {
     return (
       <>
@@ -63,6 +59,20 @@ const Cart = () => {
       </>
     );
   }
+
+  let totalPrice = 0;
+  const productsInCart = [];
+  cart.forEach((cartItem) => {
+    const product = products.find(
+      (product) => product['node']['id'].slice(22) === cartItem.id
+    );
+    productsInCart.push(product);
+    totalPrice +=
+      parseFloat(
+        product['node']['variants']['edges'][0]['node']['price']['amount']
+      ) * cartItem.quantity;
+  });
+  totalPrice = totalPrice.toFixed(2);
 
   return (
     <>
@@ -76,6 +86,7 @@ const Cart = () => {
           />
         ))}
       </CartItems>
+      <TotalPrice>Total: CAD ${totalPrice}</TotalPrice>
       <MainButton
         text="Checkout"
         type="button"

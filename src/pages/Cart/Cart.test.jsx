@@ -60,6 +60,88 @@ describe('cart page', () => {
     ).toBeInTheDocument();
   });
 
+  it('calculates correct total price', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add two of first product to cart
+    const input = await screen.findByRole('spinbutton', {
+      name: /quantity/i,
+    });
+    await user.clear(input);
+    await user.type(input, '2');
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Add second product to cart
+    const shopLink = screen.getByRole('link', { name: /shop/i });
+    await user.click(shopLink);
+    const secondProductName = new RegExp(dummyProduct2['node']['title'], 'i');
+    const secondProductLink = await screen.findByRole('link', {
+      name: secondProductName,
+    });
+    await user.click(secondProductLink);
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    const totalPrice = (
+      Number.parseFloat(
+        dummyProduct1['node']['variants']['edges'][0]['node']['price']['amount']
+      ) *
+        2 +
+      Number.parseFloat(
+        dummyProduct2['node']['variants']['edges'][0]['node']['price']['amount']
+      )
+    ).toFixed(2);
+
+    expect(screen.getByText(`Total: CAD $${totalPrice}`)).toBeInTheDocument();
+  });
+
+  it('updates total price when cart item quantity is updated', async () => {
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes, {
+      initialEntries: [`/product/${dummyProduct1['node']['id'].slice(22)}`],
+    });
+    render(<RouterProvider router={router} />);
+
+    // Add product to cart
+    await user.click(
+      await screen.findByRole('button', {
+        name: /add to cart/i,
+      })
+    );
+
+    // Go to cart
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    await user.click(cartLink);
+
+    const input = screen.getByRole('spinbutton', {
+      name: /quantity/i,
+    });
+    await user.clear(input);
+    await user.type(input, '2[Tab]');
+
+    const totalPrice = (
+      Number.parseFloat(
+        dummyProduct1['node']['variants']['edges'][0]['node']['price']['amount']
+      ) * 2
+    ).toFixed(2);
+    expect(screen.getByText(`Total: CAD $${totalPrice}`)).toBeInTheDocument();
+  });
+
   it('updates total cart quantity when cart item quantity is updated', async () => {
     const user = userEvent.setup();
     const router = createMemoryRouter(routes, {
