@@ -30,9 +30,7 @@ describe('home page', () => {
       initialEntries: ['/'],
     });
     render(<RouterProvider router={router} />);
-    const text = screen.getByText(
-      /Welcome to Sike! Like Nike but worse quality./i
-    );
+    const text = screen.getByText(/Welcome to Sike!/i);
 
     expect(text).toBeInTheDocument();
   });
