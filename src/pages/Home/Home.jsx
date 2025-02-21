@@ -40,7 +40,7 @@ const Home = () => {
             data-testid="home-image"
           />
         </picture>
-        <p>Welcome to Sike! Like Nike but worse quality.</p>
+        <p>Welcome to Sike!</p>
         <MainButton text="Start shopping" onClick={() => navigate('/shop')} />
       </Content>
     </>
