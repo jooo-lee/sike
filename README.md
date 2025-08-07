@@ -4,7 +4,7 @@ My implementation of the [shopping cart project](https://www.theodinproject.com/
 
 ## Description
 
-This is a mock shopping website, built using React and styled with styled-components. The main goals of the project were to become more familiar with React testing and React router. I set up the application using Vite and deployed it with Vercel.
+This is a mock shopping website, built using React and styled with styled-components. The main goals of the project were to become more familiar with React testing and React Router. I set up the application using Vite and deployed it with Vercel.
 
 ![Screenshot of Sike shop page](./public/demo-img.png)
 
@@ -16,7 +16,7 @@ This is a mock shopping website, built using React and styled with styled-compon
 - Handles routing as a single page application (SPA)
 - Uses `localStorage` so that items in cart persist between browser sessions
 
-## I learned how to:
+## I learned how to
 
 - Test UI elements and simulate user events using Vitest and Testing Library
 - Mock functions such as `window.fetch`
